@@ -9,12 +9,13 @@ const router = Router(); // eslint-disable-line new-cap
 
 router.param("_id", mongoId); // mongo id
 
-router.route("/orders")
+router.route("/")
   // .get(list) // returns list of orders
+  .get(wrapJSON(create))
   .post(wrapJSON(create))
   .all(methodNotAllowed);
 
-router.route("/orders/:_id")
+router.route("/:_id")
   .get(wrapJSON(read))
   .put(wrapJSON(update))
   // .delete(delete) // deletes orders

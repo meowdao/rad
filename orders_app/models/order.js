@@ -1,4 +1,6 @@
 const {Schema} = require("mongoose");
+const hydraExpress = require("hydra-express");
+const hydra = hydraExpress.getHydra();
 
 const Order = new Schema({
   status: {
@@ -11,7 +13,7 @@ const Order = new Schema({
     },
     validate: [{
       validator() {
-        if (!this._status || this._status === this.status){
+        if (!this._status || this._status === this.status) {
           return true;
         } else if (this._status === "created" && (this.status === "confirmed" || this.status === "cancelled")) {
           return true;
@@ -27,17 +29,24 @@ const Order = new Schema({
   // strict: true
 });
 
-Order.pre("validate", function preValidateStatus(next) {
-  if (this.plate) {
-    this.plate = void 0;
-    this.status = VEHICLE_STATUSES.new;
-  }
-  next();
-});
 
 Order.post("save", async function postSave() {
-  if (this.isNew) {
-    await callAPI(this);
+  if (this.status === "created") {
+    await hydra.ready().then(() => {
+
+      // this is not blocking call
+      hydra.makeAPIRequest(hydra.createUMFMessage({
+        to: "payments:[post]/v1/payments/process",
+        from: "orders:/v1/orders/process",
+        body: this,
+      }))
+        .then(result => {
+          console.log("result", result);
+        })
+        .catch((err) => {
+          console.log("catch err", err);
+        });
+    });
   }
 });
 

@@ -1,0 +1,14 @@
+#project
+.env.test
+.env.development
+.env.production
+
+# IDEA
+/.idea
+
+# Mac
+.DS_Store
+
+# NODE
+/node_modules
+

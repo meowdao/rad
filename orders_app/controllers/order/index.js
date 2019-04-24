@@ -11,7 +11,7 @@ function update(request) {
     .then(order => {
       order.set(request.body);
       return order.save();
-    })
+    });
 }
 
 function read(request) {

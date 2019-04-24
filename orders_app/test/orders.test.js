@@ -23,15 +23,15 @@ function closeConnections() {
 describe("Orders", () => {
   const superapp = supertest(app);
 
-  describe("POST /orders", () => {
+  describe("POST /v1/orders", () => {
     it("should create order", () => {
       return superapp
-        .post("/orders")
+        .post("/v1/orders")
         .type("application/json;charset=utf-8")
         .send({})
-        .expect(200)
+        // .expect(200)
         .then(({body}) => {
-          // console.debug("body", body);
+          console.debug("body", body);
           assert.strictEqual(body.status, "created");
         });
     });
@@ -39,7 +39,7 @@ describe("Orders", () => {
     after(tearDown);
   });
 
-  describe("GET /orders/:_id", () => {
+  describe("GET /v1/orders/:_id", () => {
     let testModel;
     beforeEach(() =>
       setUp({status: "created"})
@@ -50,7 +50,7 @@ describe("Orders", () => {
 
     it("should", () => {
       return superapp
-        .get(`/orders/${testModel._id}`)
+        .get(`/v1/orders/${testModel._id}`)
         .expect(200)
         .then(({body}) => {
           // console.debug("body", body);
@@ -61,7 +61,7 @@ describe("Orders", () => {
     after(tearDown);
   });
 
-  describe("PUT /orders/:_id", () => {
+  describe("PUT /v1/orders/:_id", () => {
     describe("status = created", () => {
       let testModel;
       beforeEach(() =>
@@ -73,7 +73,7 @@ describe("Orders", () => {
 
       it("should set `confirmed`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "confirmed",
@@ -87,7 +87,7 @@ describe("Orders", () => {
 
       it("should set `cancelled`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "cancelled",
@@ -101,7 +101,7 @@ describe("Orders", () => {
 
       it("should not set delivered", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "delivered",
@@ -130,7 +130,7 @@ describe("Orders", () => {
 
       it("should not set `created`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "created",
@@ -147,7 +147,7 @@ describe("Orders", () => {
 
       it("should set `cancelled`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "cancelled",
@@ -161,7 +161,7 @@ describe("Orders", () => {
 
       it("should set delivered", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "delivered",
@@ -187,7 +187,7 @@ describe("Orders", () => {
 
       it("should not set `created`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "created",
@@ -204,7 +204,7 @@ describe("Orders", () => {
 
       it("should not set `confirmed`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "confirmed",
@@ -221,7 +221,7 @@ describe("Orders", () => {
 
       it("should not set `delivered`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "delivered",
@@ -250,7 +250,7 @@ describe("Orders", () => {
 
       it("should not set `created`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "created",
@@ -267,7 +267,7 @@ describe("Orders", () => {
 
       it("should not set `confirmed`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "confirmed",
@@ -284,7 +284,7 @@ describe("Orders", () => {
 
       it("should not set `cancelled`", () => {
         return superapp
-          .put(`/orders/${testModel._id}`)
+          .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
             status: "cancelled",
