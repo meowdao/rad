@@ -1,0 +1,22 @@
+{
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "4.16.4",
+    "express-session": "1.15.6",
+    "cookie-parser": "1.4.4",
+    "body-parser": "1.18.3",
+    "morgan": "1.9.1",
+    "connect-redis": "3.4.0",
+    "dotenv": "6.2.0",
+    "mongoose": "5.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.11",
+    "supertest": "3.4.2",
+    "mocha": "6.1.4"
+  },
+  "scripts": {
+    "start": "NODE_ENV=development nodemon ./index.js",
+    "test": "NODE_ENV=test node_modules/.bin/mocha"
+  }
+}
