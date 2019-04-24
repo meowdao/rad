@@ -1,5 +1,11 @@
 # rad
 
+make sure you have nodejs npm mongodb and redis installed
+
+```bash
+sudo port install nodejs10 npm6 redis mongodb
+```
+
 In first terminal window
 ```sh
 cd orders_app
