@@ -8,7 +8,7 @@ function process(request, response) {
   hydra.ready().then(() => {
     return hydra.makeAPIRequest(hydra.createUMFMessage({
       from: "payments:[post]/v1/payments/process",
-      to: "orders:[put]/v1/orders/" + request.body._id,
+      to: `orders:[put]/v1/orders/${request.body._id}`,
       body: {
         status: getRandomElement(["confirmed", "declined"]), // <- inconsistent with current model
       },

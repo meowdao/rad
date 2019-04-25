@@ -1,6 +1,7 @@
 const assert = require("assert");
 const supertest = require("supertest");
 const mongoose = require("mongoose");
+const {ORDER_STATUSES} = require("../constants/statuses");
 
 const app = require("../index");
 
@@ -32,7 +33,7 @@ describe("Orders", () => {
         // .expect(200)
         .then(({body}) => {
           console.debug("body", body);
-          assert.strictEqual(body.status, "created");
+          assert.strictEqual(body.status, ORDER_STATUSES.created);
         });
     });
 
@@ -42,7 +43,7 @@ describe("Orders", () => {
   describe("GET /v1/orders/:_id", () => {
     let testModel;
     beforeEach(() =>
-      setUp({status: "created"})
+      setUp({status: ORDER_STATUSES.created})
         .then(model => {
           testModel = model;
         }),
@@ -54,7 +55,7 @@ describe("Orders", () => {
         .expect(200)
         .then(({body}) => {
           // console.debug("body", body);
-          assert.strictEqual(body.status, "created");
+          assert.strictEqual(body.status, ORDER_STATUSES.created);
         });
     });
 
@@ -65,7 +66,7 @@ describe("Orders", () => {
     describe("status = created", () => {
       let testModel;
       beforeEach(() =>
-        setUp({status: "created"})
+        setUp({status: ORDER_STATUSES.created})
           .then(model => {
             testModel = model;
           }),
@@ -76,7 +77,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "confirmed",
+            status: ORDER_STATUSES.confirmed,
           })
           .expect(200)
           .then(({body}) => {
@@ -90,7 +91,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "cancelled",
+            status: ORDER_STATUSES.cancelled,
           })
           .expect(200)
           .then(({body}) => {
@@ -104,7 +105,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "delivered",
+            status: ORDER_STATUSES.delivered,
           })
           .expect(400)
           .then(({body}) => {
@@ -122,7 +123,7 @@ describe("Orders", () => {
     describe("status = confirmed", () => {
       let testModel;
       beforeEach(() =>
-        setUp({status: "confirmed"})
+        setUp({status: ORDER_STATUSES.confirmed})
           .then(model => {
             testModel = model;
           }),
@@ -133,7 +134,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "created",
+            status: ORDER_STATUSES.created,
           })
           .expect(400)
           .then(({body}) => {
@@ -150,7 +151,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "cancelled",
+            status: ORDER_STATUSES.cancelled,
           })
           .expect(200)
           .then(({body}) => {
@@ -164,7 +165,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "delivered",
+            status: ORDER_STATUSES.delivered,
           })
           .expect(200)
           .then(({body}) => {
@@ -179,7 +180,7 @@ describe("Orders", () => {
     describe("status = cancelled", () => {
       let testModel;
       beforeEach(() =>
-        setUp({status: "cancelled"})
+        setUp({status: ORDER_STATUSES.cancelled})
           .then(model => {
             testModel = model;
           }),
@@ -190,7 +191,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "created",
+            status: ORDER_STATUSES.created,
           })
           .expect(400)
           .then(({body}) => {
@@ -207,7 +208,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "confirmed",
+            status: ORDER_STATUSES.confirmed,
           })
           .expect(400)
           .then(({body}) => {
@@ -224,7 +225,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "delivered",
+            status: ORDER_STATUSES.delivered,
           })
           .expect(400)
           .then(({body}) => {
@@ -242,7 +243,7 @@ describe("Orders", () => {
     describe("status = delivered", () => {
       let testModel;
       beforeEach(() =>
-        setUp({status: "delivered"})
+        setUp({status: ORDER_STATUSES.delivered})
           .then(model => {
             testModel = model;
           }),
@@ -253,7 +254,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "created",
+            status: ORDER_STATUSES.created,
           })
           .expect(400)
           .then(({body}) => {
@@ -270,7 +271,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "confirmed",
+            status: ORDER_STATUSES.confirmed,
           })
           .expect(400)
           .then(({body}) => {
@@ -287,7 +288,7 @@ describe("Orders", () => {
           .put(`/v1/orders/${testModel._id}`)
           .type("application/json;charset=utf-8")
           .send({
-            status: "cancelled",
+            status: ORDER_STATUSES.cancelled,
           })
           .expect(400)
           .then(({body}) => {
