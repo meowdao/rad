@@ -6,7 +6,8 @@ const hydraExpress = require("hydra-express");
 
 function registerRoutesCallback() {
   hydraExpress.registerRoutes({
-    "/v1/payments": require("./routes/payments"),
+    "/v1/payments": require("./routes/payments/v1"),
+    "/v2/payments": require("./routes/payments/v2"),
   });
 }
 

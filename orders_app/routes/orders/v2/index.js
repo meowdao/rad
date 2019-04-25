@@ -1,9 +1,9 @@
 const {Router} = require("express");
-const {methodNotAllowed} = require("../../utils/middleware");
-const {wrapJSON} = require("../../utils/wrapper");
-const {mongoId} = require("../../utils/validator");
+const {methodNotAllowed} = require("../../../utils/middleware");
+const {wrapJSON} = require("../../../utils/wrapper");
+const {mongoId} = require("../../../utils/validator");
 
-const {create, update, read} = require("../../controllers/order");
+const {create, update, read} = require("../../../controllers/order/v2");
 
 const router = Router(); // eslint-disable-line new-cap
 

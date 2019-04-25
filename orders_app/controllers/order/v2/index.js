@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
+const {create, read} = require("../v1");
 
-const Order = mongoose.model("Order");
-
-function create(request) {
-  return Order.create({...request.body, status: "created"});
-}
 
 function update(request) {
   return read(request)
@@ -12,10 +8,6 @@ function update(request) {
       order.set(request.body);
       return order.save();
     });
-}
-
-function read(request) {
-  return Order.findById(request.params._id);
 }
 
 module.exports = {

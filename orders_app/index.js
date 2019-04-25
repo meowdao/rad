@@ -12,7 +12,8 @@ let app = hydraExpress.getExpressApp();
 
 function registerRoutesCallback() {
   hydraExpress.registerRoutes({
-    "/v1/orders": require("./routes/orders"),
+    "/v1/orders": require("./routes/orders/v1"),
+    "/v2/orders": require("./routes/orders/v2"),
   });
 }
 

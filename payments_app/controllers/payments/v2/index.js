@@ -1,4 +1,4 @@
-const {getRandomElement} = require("../utils/random");
+const {getRandomElement} = require("../../../utils/random");
 const hydraExpress = require("hydra-express");
 const hydra = hydraExpress.getHydra();
 
@@ -7,10 +7,10 @@ function process(request, response) {
 
   hydra.ready().then(() => {
     return hydra.makeAPIRequest(hydra.createUMFMessage({
-      from: "payments:[post]/v1/payments/process",
-      to: "orders:[put]/v1/orders/" + request.body._id,
+      from: "payments:[post]/v2/payments/process",
+      to: "orders:[put]/v2/orders/" + request.body._id,
       body: {
-        status: getRandomElement(["confirmed", "cancelled"]),
+        status: getRandomElement(["confirmed", "cancelled"]), // inconsistent with current model
       },
     }))
       .then(result => {
@@ -27,12 +27,3 @@ function process(request, response) {
 module.exports = {
   process,
 };
-
-
-/*
-    process(message).then(data => {
-      hydra.sendReplyMessage(message, hydra.createUMFMessage({
-        body: data,
-      }));
-    });
- */
