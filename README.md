@@ -24,3 +24,7 @@ npm start
 ```
 
 then navigate to http://localhost:8080/v1/orders
+
+all configs are in
+~/orders_app/.env.development
+~/payments_app/.env.development

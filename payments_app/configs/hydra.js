@@ -10,9 +10,7 @@ module.exports = {
     serviceType: "mcp",
     serviceWorker: false,
     redis: {
-      host: "127.0.0.1",
-      port: 6379,
-      db: 15,
+      url: process.env.REDIS_URL
     },
   },
 };
